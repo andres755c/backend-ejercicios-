@@ -7,12 +7,12 @@ class productManager {
         this.#productos = []
     }
     
-    static generarNuevoId() {
+    static generarUnId() {
         return ++productManager.#ultimoId
     }
 
     addProduct({title, description, price, thumbnial, stock}) {
-        const id = productManager.generarNuevoId()
+        const id = productManager.generarUnId()
         const producto = new Producto({title, id, description, price, thumbnial, stock})
         this.#productos.push(producto)
         return producto
@@ -21,11 +21,22 @@ class productManager {
     getProduct() { 
         return this.#productos
     }
+
+    getProductById(id) {
+        const idExistente = this.#productos.find(p => p.id === parseInt(id))
+
+        if(idExistente) {
+            console.log(this.#productos.filter(p => p.id === id))
+            return this.#productos.filter(p => p.id === id)
+        } else {
+            console.log(`OH NO, SE A REALIZADO UN ERROR :(((((((, id: ${id} no encontrado`)
+        }
+    }
 }
 
 class Producto {
 
-    constructor({title, id = Producto.generarNuevoId(), description, price, thumbnial, stock}) {
+    constructor({title, id = Producto.generarUnId(), description, price, thumbnial, stock}) {
         this.title = title
         this.id = id
         this.description = description
@@ -33,8 +44,9 @@ class Producto {
         this.thumbnial = thumbnial
         this.stock = stock
     }
-
 }
+
+
 
 const pm = new productManager()
 
@@ -44,10 +56,5 @@ const p3 = pm.addProduct({title:'Teclado', description:'un Teclado simple', pric
 const p4 = pm.addProduct({title:'Monitor', description:'un Monitor simple', price:'$' + 700, thumbnial:'imagen.png', stock: 10 })
 const p5 = pm.addProduct({title:'Auriculares', description:'unos Auriculares simple', price:'$' + 1000, thumbnial:'imagen.png', stock: 15 })
 
-/*console.log(p1)
-console.log(p2)
-console.log(p3)
-console.log(p4)
-console.log(p5)*/
-
 console.log(pm.getProduct())
+console.log(pm.getProductById())
