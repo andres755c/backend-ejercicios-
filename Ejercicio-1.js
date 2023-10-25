@@ -1,6 +1,5 @@
-
 class productManager {
-    static #ultimoId = 0
+    static ultimoId = 0
     #productos
     
     constructor() {
@@ -8,7 +7,7 @@ class productManager {
     }
     
     static generarUnId() {
-        return ++productManager.#ultimoId
+        return ++productManager.ultimoId
     }
 
     addProduct({title, description, price, thumbnial, stock}) {
