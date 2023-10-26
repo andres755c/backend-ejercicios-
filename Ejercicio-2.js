@@ -32,11 +32,11 @@ async #writeProducts() {
     await fs.writeFile(this.path, productsJson)
 }
 
-async updateProduct(id, userData) {
+async updateProduct(id, productData) {
     await this.#readProducts()
     const index = this.#products.findIndex(u => u.id === id)
     if (index !== -1) {
-        const newProductu = new Product({ id, ...this.#products[index], ...userData })
+        const newProductu = new Product({ id, ...this.#products[index], ...productData })
         this.#products[index] = newProductu
         await this.#writeProducts()
         return newProductu
