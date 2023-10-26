@@ -36,10 +36,10 @@ async updateProduct(id, userData) {
     await this.#readProducts()
     const index = this.#products.findIndex(u => u.id === id)
     if (index !== -1) {
-        const nuevoUsu = new Product({ id, ...this.#products[index], ...userData })
-        this.#products[index] = nuevoUsu
+        const newProductu = new Product({ id, ...this.#products[index], ...userData })
+        this.#products[index] = newProductu
         await this.#writeProducts()
-        return nuevoUsu
+        return newProductu
     } else {
         throw new Error('error al intentar actualizar el producto: producto no encontrado')
     }
