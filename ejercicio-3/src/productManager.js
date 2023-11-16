@@ -29,11 +29,12 @@ export class ProductManager {
     }
 
     obtenerTodos() {
+        if(limit) this.productos.slice(0, limit)
         return this.productos
     }
 
     async obtenerPorId(id) {``
-        await this.#read()
+        //await this.#read()
         return this.productos.find(p => p.id === id)
     }
 }

@@ -4,19 +4,21 @@ import { ProductManager } from "./productManager.js";
 const productManager = new ProductManager()
 const app = express()
 
-app.get('/productos', (req, res) => {
+app.get('/productos', async (req, res) => {
     console.log(req.query)
-    if (req.query['id']) {
+    const {limit} = req.query
+        res.json({productos: await productManager.obtenerTodos(Number(limit))})
+    /*if (req.query['id']) {
         res.json({ productos : productManager.obtenerPorId(req.query('id'))
         })
     } else {
         res.json({productos: productManager.obtenerTodos()})
     }
-    res.json({productos})
+    res.json({productos})*/
 })
 
 app.get('/productos/:pid', async (req, res) => {
-    const idProductos = parseInt(req.params['pid'])
+    const idProductos = (req.params['pid'])
     const buscado = await productManager.obtenerPorId(idProductos)
     if (buscado) {
         res.json({productos: buscado})
