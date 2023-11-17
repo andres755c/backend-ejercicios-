@@ -1,7 +1,7 @@
 import express from "express";
 import { ProductManager } from "./productManager.js";
 
-const productManager = new ProductManager()
+const productManager = new ProductManager("./products.json")
 const app = express()
 
 app.get('/productos', async (req, res) => {
@@ -19,7 +19,7 @@ app.get('/productos', async (req, res) => {
 
 app.get('/productos/:pid', async (req, res) => {
     const idProductos = (req.params['pid'])
-    const buscado = await productManager.obtenerPorId(idProductos)
+    const buscado = await productManager.obtenerPorId(Number(idProductos))
     if (buscado) {
         res.json({productos: buscado})
     } else {
