@@ -1,30 +1,25 @@
 import express from "express";
-import { ventasRouter } from "./ventasRouter.js";
-import { productRouter } from "./productosRouter.js";
-import { upload } from "multer.js";
+import { apiRouter } from "./apiRouters.js";
+import { webRouter } from "./webRouter.js";
 
 const app = express()
 
 app.use(express.json())
 
-app.use(express.static('./views'))
-app.use('/static', express.static('./static'))
+/*app.use(express.static('./views'))
+app.use('/static', express.static('./static'))*/
 
-app.use('/api/ventas', ventasRouter)
-app.use('/api/productos', productRouter)
+//app.use('/api', apiRouter)
+//app.use('/', webRouter)
+app.use('/', productosRouter)
+app.use('/', carritoRouter)
 
-app.post('/uploads', upload.single('imagen'), (req, res) => {
-    res.json({
-        file: req.file
-    })
-})
-
-app.use((err, req, res, next) => {
+/*app.use((err, req, res, next) => {
     res.json({
         status: 'error',
         description: err.message
     })
-})
+})*/
 
 app.listen(4545, () => {
     console.log('conectado correctamente')
