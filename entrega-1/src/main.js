@@ -11,8 +11,8 @@ app.use('/static', express.static('./static'))*/
 
 //app.use('/api', apiRouter)
 //app.use('/', webRouter)
-app.use('/', productosRouter)
-app.use('/', carritoRouter)
+app.use('/', ProductosRouter)
+app.use('/', CarritoRouter)
 
 /*app.use((err, req, res, next) => {
     res.json({
